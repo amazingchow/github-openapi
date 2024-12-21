@@ -4,8 +4,8 @@
 
 ### Prerequisites
 
-* for Linux or MacOS users
-* you have installed python 3.7 or higher
+* Linux or MacOS
+* Installed python 3.7 or higher
 
 ### Installation
 
@@ -22,7 +22,7 @@ source venv/bin/activate
 pip install -r requirements.txt
 ```
 
-## CRUD with your personal GitHub space
+## CRUD Operations for Your Personal GitHub Space
 
 * read operations
 

@@ -1,5 +1,6 @@
 # -*- coding: utf-8 -*-
 import argparse
+import os
 import requests
 import tqdm
 import ujson as json
@@ -17,7 +18,7 @@ def list_repos(usr, token, page):
         url="https://api.github.com/users/{0}/repos?page={1}".format(usr, page), headers=_Headers)
     if resp.status_code == 200:
         repos = resp.json()
-        with open("./output/repos_p{0:02d}.json".format(page), "w") as fd:
+        with open("./.output/repos_p{0:02d}.json".format(page), "w") as fd:
             json.dump(repos, fd, indent=4)
         CustomLogger.info("list repos on page {0}".format(page))
     else:
@@ -32,6 +33,11 @@ if __name__ == "__main__":
     if args.num <= 0 or args.num > 9999:
         CustomLogger.fatal("invalid input num")
     else:
+        try:
+            os.makedirs("./.output", exist_ok=True)
+        except Exception as e:
+            CustomLogger.fatal("failed to create output directory")
+
         with open("./conf/github.yml", "r") as fd:
             conf = yaml.safe_load(fd)
             usr = conf["username"]
